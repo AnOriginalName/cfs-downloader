@@ -1,0 +1,14 @@
+#!/bin/bash
+#arg 1 is the year of the data, 
+# arg 2 is the end month
+# arg3 is thee step size in months. 
+# arg4 is the data type
+# So if I wanted to download 3 months of data from 2015/01 - 2015/03, the input would be ./download_data 2015 03 3 tmin
+mkdir -p data/$1
+mkdir -p data/$1/$2
+python3 download_data.py $1 $2 $3 $4 > list$1$2.txt
+input="list$1$2.txt"
+while IFS= read -r line
+do
+  eval ($line)
+done < "$input
