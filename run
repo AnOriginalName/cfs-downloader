@@ -1,2 +1,7 @@
 # Arg 1 is the target variable, Arg 2 is the time step size in months, Arg 3 is the start year, Arg 4 is the start month, Arg 5 is the end year, Arg 6 is the end month, Arg 7 is the target latitude, Arg 8 is the target Longitude, Arg 9 is the name of the output file
-python3 run.py $1 $2 $3 $4 $5 $6 $7 $8 $9
+python3 run.py $1 $2 $3 $4 $5 $6 $7 $8 $9 > commands.txt
+input="commands.txt"
+while IFS= read -r line
+do
+  eval ($line)
+done < "$input

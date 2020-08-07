@@ -2,6 +2,14 @@ import sys
 import datetime
 import pygrib
 
+#This reads one grb file and extracts all the  target variable data for the inputted location
+# The input arguments are 
+# Arg 1 : name of the grb file
+# Arg 2: latitude of the real location
+# Arg 3: Longitude of the real location
+# Arg 4: real latitude
+# Arg 5: real longitude
+
 def increment_time(time):
 	return time + datetime.timedelta(hours=6)
 
