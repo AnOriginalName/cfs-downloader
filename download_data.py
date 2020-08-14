@@ -1,5 +1,6 @@
 import sys
 import wget
+import urllib.request,urllib.parse,urllib.error
 
 year = int(sys.argv[1])
 end = year + 1
@@ -72,11 +73,19 @@ def download_types():
 	down_source = url + "/" + day_str(1) + "/" + day_str(2) + "/" + day_str(3) + "/" + day_str(4) + "/" + datatype + ".01." + day_str(4) +".daily.grb2"
 	dest = "data"
 
+	#So there are two versions of using wget here. The first has a timeout in case the internet goes down and is executed in Bash, the second does it in Python. 
+	#The Bash commands have a timeout, and keeps trying to download a file if the internet goes down. 
+	#However it seems to mess with the parallization, whereas the python Wget avoids issues. But there doesn't seem to be an option to keep trying if the internet goes down in the python version
 	targ = dest +  "/" + str(year) + "/" +  str_month + "/" + datatype + ".01." + day_str(4) +".daily.grb2"
-	print("while true;do")
-	print("\twget  -T 15 -c " + down_source + " -O " + targ + " && break")
-	print("done")
-	#wget.download(down_source, targ)
+	#print("while true;do")
+	#print("\twget  -T 15 -c " + down_source + " -O " + targ + " && break")
+	#print("done")
+	try:
+		wget.download(down_source, targ)
+	except urllib.error.HTTPError:
+		print("\n------------------------------------------")
+		print("FAILED TO DOWNLOAD: " + datatype + " for " + dat_str(4))
+		print("------------------------------------------")
 
 while year != end and month <= int(goal_month):
 	download_types()

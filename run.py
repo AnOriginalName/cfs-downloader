@@ -64,7 +64,7 @@ def s_time(date, t="", file=False):
 	if t == "down":
 		end = " " + str(step) + " " + variable
 	else:
-		end = " " + lat_index + " " + lon_index + " " + sys.argv[9] + " " + lat + " " + lon
+		end = " " + str(lat_index) + " " + str(lon_index) + " " + sys.argv[9] + " " + str(lat) + " " + str(lon)
 	if(file == True):
 		return s_year + "/"	+ s_month
 	return s_year + " " + s_month + end
@@ -86,7 +86,7 @@ print("./download_data " + s_time(down_date,"down"))
 print("wait")
 down_date = increment_date(down_date)
 
-print("./convert " + s_time(conv_date) + "| ./download_data " + s_time(down_date,"down"))
+print("./convert " + s_time(conv_date) + " | ./download_data " + s_time(down_date,"down"))
 conv_date = increment_date(conv_date)
 down_date = increment_date(down_date)
 print("wait")
